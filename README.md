@@ -57,4 +57,6 @@ version 1, with the types of Vigie's module: there is no copy of the format here
 
 ## License
 
-MIT. Not affiliated with the FileZilla project.
+MIT. Not affiliated with the FileZilla project. FileZilla's name and logo belong to the FileZilla project; the logo on
+Vigie's Add-ons page is the one of [Simple Icons](https://simpleicons.org), used to say which
+software the add-on reads.

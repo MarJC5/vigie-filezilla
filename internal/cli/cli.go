@@ -20,7 +20,7 @@ import (
 	"github.com/MarJC5/vigie/addon/info"
 )
 
-// image is the add-on's image on Vigie's Add-ons page: a folder into a server.
+// image is the add-on's image on Vigie's Add-ons page: FileZilla's logo.
 //
 //go:embed image.svg
 var image []byte
