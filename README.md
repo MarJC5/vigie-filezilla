@@ -31,9 +31,18 @@ shows what is added and what is already there; nothing is added before you confi
 
 The export names your servers and users: keep it somewhere safe, or delete it once imported.
 
+## In Vigie
+
+The add-on keeps Vigie's add-on contract ([docs/addons.md](https://github.com/MarJC5/vigie/blob/main/docs/addons.md)
+in Vigie): `--vigie-info` prints its description (title, texts in English and French, image, the
+site manager to read as its one setting), and `--vigie-export <path>` writes the export where Vigie
+asks. Its format comes from Vigie's module `github.com/MarJC5/vigie/addon`, and its tests run
+Vigie's conformance checks (`addontest`).
+
 ## Build
 
-Go 1.27 or later:
+Go 1.27 or later. While Vigie's repository is private, Go fetches its module directly:
+`GOPRIVATE=github.com/MarJC5/*`, with git access to GitHub.
 
 ```sh
 make build   # ./vigie-filezilla
@@ -44,8 +53,7 @@ make check   # format, vet, tests, vulnerabilities
 
 The add-on reads FileZilla's `sitemanager.xml` as FileZilla 3.71.0 reads it
 (`src/commonui/site_manager.cpp`, `src/commonui/xml_file.cpp`), and writes Vigie's export format,
-version 1, as Vigie documents it (`docs/data.md` and `docs/export-v1.schema.json` in Vigie; a copy of
-the schema is in `testdata/` for the tests).
+version 1, with the types of Vigie's module: there is no copy of the format here.
 
 ## License
 

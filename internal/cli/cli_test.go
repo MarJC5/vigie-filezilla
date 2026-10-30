@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/MarJC5/vigie-filezilla/internal/cli"
+	"github.com/MarJC5/vigie/addon/addontest"
 )
 
 var sample = filepath.Join("..", "..", "testdata", "sitemanager.xml")
@@ -81,5 +82,22 @@ func TestWrongUse(t *testing.T) {
 	}
 	if code, _, errOut := run(t, nil, "-h"); code != 0 || !strings.Contains(errOut, "Passwords are never read") {
 		t.Errorf("-h: exit %d, %s", code, errOut)
+	}
+}
+
+// The add-on keeps Vigie's contract: its description, and a run as Vigie makes it.
+func TestTheContractWithVigie(t *testing.T) {
+	program := addontest.Build(t, "../../cmd/vigie-filezilla")
+	i := addontest.Info(t, program)
+	if i.Title.In("fr") != "FileZilla" || i.Image == "" || len(i.Settings) != 1 || i.Settings[0].Flag != "--file" {
+		t.Errorf("description = %+v", i)
+	}
+	file, err := filepath.Abs(sample)
+	if err != nil {
+		t.Fatal(err)
+	}
+	f, report := addontest.Export(t, program, map[string]string{"file": file})
+	if len(f.Hosts) != 2 || !strings.Contains(report, "Skipped Bucket: S3") {
+		t.Errorf("export = %d hosts, report %q", len(f.Hosts), report)
 	}
 }

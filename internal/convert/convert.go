@@ -8,8 +8,8 @@ import (
 	"time"
 	"uuid"
 
-	"github.com/MarJC5/vigie-filezilla/internal/export"
 	"github.com/MarJC5/vigie-filezilla/internal/sitemanager"
+	"github.com/MarJC5/vigie/addon/export"
 )
 
 // Reason tells why a server of FileZilla is not brought.

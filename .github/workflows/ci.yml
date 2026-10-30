@@ -7,6 +7,11 @@ on:
 permissions:
   contents: read
 
+# Vigie's repository is private: its module is fetched directly, with a read-only token of the
+# repository secrets (VIGIE_READ_TOKEN: Contents read on MarJC5/vigie only).
+env:
+  GOPRIVATE: github.com/MarJC5/*
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -21,4 +26,6 @@ jobs:
       - uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
+      - name: Read access to Vigie's module
+        run: git config --global url."https://x-access-token:${{ secrets.VIGIE_READ_TOKEN }}@github.com/MarJC5/vigie".insteadOf "https://github.com/MarJC5/vigie"
       - run: make check
